@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开课宝2---百度音乐榜单</title>
+    <style>
+        .bigBox{
+            text-align: left;
+        }
+      
+
+    </style>
+</head>
+<body>
+    <div class="bigBox">
+        <h1 style="text-align: center;">百度音乐榜单</h1>
+        <ul class="box" id="box">
+            <li>
+                <input type="checkbox">
+                <span>月光宝盒-李白</span>
+                <a class="shouchang" href="">收藏</a>
+                <a href="">删除</a>
+            </li>
+        </ul>   
+
+        <div>
+            <label for=""><input class="checkall" type="checkbox">全选</label>
+            <!-- <label for=""><input class="nocheckall" type="checkbox">取消全选</label> -->
+            <input class="addVal" type="text">
+            <button class="add">添加歌曲</button>
+        </div>
+    </div>  
+    
+
+ <script>
+const obj = [
+    {
+        id: 1,
+        checked: true,//是否选中
+        name: '东风破--周杰伦',//歌名
+        collect: true//收藏
+    }, {
+        id: 2,
+        checked: true,//是否选中
+        name: '月光宝盒--刘德华',//歌名
+        collect: false//收藏
+    }, {
+        id: 3,
+        checked: true,//是否选中
+        name: '山丘---李宗盛',//歌名
+        collect: false//收藏
+    }, {
+        id: 4,
+        checked: true,//是否选中
+        name: '小苹果',//歌名
+        collect: true//收藏
+    },
+]
+
+let checkall = document.querySelector(".checkall")
+
+const render = (data) => {
+    let box = document.getElementById("box");
+    box.innerHTML = '';
+    data.forEach((item, key) => {
+        let list = document.createElement("li");
+        list.innerHTML = `
+        <input class="check" type="checkbox" ${item.checked && 'checked'}>
+        <span>${item.name}</span>
+        ${item.collect ? '<a class="shouchang" href="javascript:;">取消收藏</a>' : '<a class="shouchang" href="javascript:;">收藏</a>'
+            }
+        <a class="deletes" href="javascript:;">删除</a>`
+        box.appendChild(list)
+    });
+    let allchecks=obj.every((item)=>item.checked===true)
+    checkall.checked=allchecks
+    buindEvent()
+}
+render(obj)
+
+function buindEvent() {
+    let aclick = document.querySelectorAll('li')
+    aclick.forEach((li, key) => {
+        //收藏--取消收藏
+        let shouchang = li.querySelector(".shouchang")
+        shouchang && (shouchang.onclick = function () {
+            obj[key].collect = !obj[key].collect
+            render(obj)
+        })
+
+        //选中取消选中
+        let check = li.querySelector(".check")
+        check && (check.onclick = function () {
+            obj[key].checked = this.checked;
+            render(obj)
+        })
+
+        //删除
+        let deletes = li.querySelector(".deletes")
+        deletes && (deletes.onclick = function () {
+            obj.splice(key,1)
+            render(obj)
+        })
+    })
+}
+
+    //全选
+    checkall && (checkall.onclick = function () {
+        obj.map((item)=>{
+            item.checked=this.checked
+        })
+        render(obj)
+    })
+
+    //添加
+    let add = document.querySelector(".add")
+    add && (add.onclick = function () {
+        let addVal = document.querySelector(".addVal");
+        if(!addVal.value){
+            alert("请添加歌名")
+            return
+        }
+        const objItem= {
+            id: new Date,
+            checked: true,//是否选中
+            name: addVal.value,//歌名
+            collect: true//收藏
+        }
+        obj.push(objItem)
+        addVal.value=""
+        render(obj)
+    })
+
+</script>   
+</body>
+</html>

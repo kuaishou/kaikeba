@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模块化</title>
+</head>
+
+<body>
+    <button id="btn">按需引入按钮</button>
+
+    <script type="module">//需要起http服务才可以
+        // <script type="module" src="{{ './03module.js' }}">
+
+        //AMD的require.js   CMD的sea.js
+        //解决变量污染
+        //最重要功能----导入、导出----ES6的导入export、export default；导出是import {} from 
+        import objs, { outPerson } from './03module.js';
+        console.log(objs);
+        console.log(outPerson);
+
+        //按需引入
+        let bttn = document.querySelector('#btn');
+        bttn.onclick = async function () {
+            let res = await import('./03module.js')
+            console.log('按需引入', res)
+        }
+
+    </script>
+</body>
+
+</html>

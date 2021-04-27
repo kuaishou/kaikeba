@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1面向对象</title>
+</head>
+<body>
+    
+
+<script>
+//深拷贝----简单数据类型不需要深拷贝；复杂数据类型是改变指向需要深拷贝
+//1、原理把复杂数据类型转化为简单数据类型后再转换回来-----JSON.parse(JSON.stringify(obj))-----不能解决方法函数数组等
+//2、深拷贝解决该问题---完美
+let ObjData={
+    name:'邢浩东',
+    age:18,
+    aihao:function(){
+        console.log('深拷贝爱好')
+    },
+    children:['邢栋','邢天']
+}
+let neeDataobj=JSON.parse(JSON.stringify(ObjData))
+neeDataobj.name='李白'
+console.log(ObjData.name)
+console.log(neeDataobj.name)
+let a=12;
+let b=a;
+b=18
+console.log(b)
+
+//深拷贝
+function deepClone(obj){
+    let newObj=Array.isArray(obj)?[]:{}
+    for(let key in obj){
+        if(obj.hasOwnProperty(key)){
+            if(typeof obj[key]==="object"){
+                newObj[key]=deepClone(obj[key]) 
+            }else{
+                newObj[key]=obj[key]
+            }
+        }
+    }
+    return newObj
+}
+let deepObj=deepClone(ObjData)
+console.log(deepObj)
+console.log(deepObj.aihao())
+
+
+//工厂模式----浪费内存空间
+function Gperson(name){
+    let obj={};
+    obj.name=name;
+    obj.age=20;
+    obj.aihao=function(){
+        console.log("篮球")
+    }
+    return obj
+}
+//构造函数  constructor可以判断是否是该函数构造实例
+function Person(name){
+    this.name=name;
+    this.age=20;
+    this.hary=function(){
+        console.log('爱篮球')
+    }
+}
+
+Person.prototype.aihao=function(){
+    console.log('爱好')
+}
+
+let zhang=new Person('张三')
+let libai=new Person('李白')
+
+
+console.log(zhang.constructor)
+Person.hai=188
+console.log(Person.hai)
+console.log(zhang.hary===libai.hary)
+console.log(zhang.aihao===libai.aihao)
+zhang.age=18;
+console.log(zhang.age)
+console.log(libai.age)
+
+
+
+//继承call()/apply()/bind()
+function Dob(name,age){
+    this.name=name;
+    this.age=age;
+    this.money=30000;
+}
+
+function sun(name,age){
+    
+    Dob.call(this,name,age)//改变Dobthis指向sun
+    this.sex='男'
+    //Dob.bind(this)(name,age)
+    //Dob.call(this,[name,age])
+}
+let sunDate=new sun('邢浩东',18)
+console.log(sunDate)
+
+//ES6继承父类----可以继承属性和方法
+class xingD{
+    constructor(name){
+        this.name=name;
+        this.age=18;
+    }
+    getName(){
+        console.log(this.name)
+    }
+}
+class xingSon extends xingD{
+    constructor(name){
+        super(name)//super调用父类原型关键字传值
+    }
+}
+let newSon=new xingSon('ES6-邢浩东')
+
+newSon.getName()//继承父类方法
+
+
+</script>
+</body>
+</html>

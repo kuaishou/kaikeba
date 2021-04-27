@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+
+<body>
+
+    <script>
+        function fn1() {
+            console.log('方法1')
+        }
+        function fn2() {
+            console.log('方法2')
+        }
+        //正常执行函数
+        // fn1()
+        // fn2()
+
+// 观察者模式写法----用数组把事件保存起来，统一执行=======常用语初始化页面执行多个函数
+let handle={}
+function addevent(eventName,fn){//收集保存方法函数
+    if(typeof handle[eventName]==='undefined'){
+        handle[eventName]=[]
+    }
+    handle[eventName].push(fn)
+}
+function trigger(eventName){//触发执行
+    if(typeof handle[eventName]===undefined){
+        return
+    }
+    handle[eventName].forEach(fn => {
+        fn()
+    });
+}
+addevent('elemName',fn1)//添加方法
+addevent('elemName',fn2)
+
+trigger('elemName')//执行
+
+function removeevent(eventName,fn){//移除方法
+    if(typeof handle[eventName]==="undefined"){
+        return
+    }
+
+    handle[eventName].splice(handle[eventName].indexOf(fn),1)
+}
+removeevent('elemName',fn1)
+trigger('elemName')//执行
+    </script>
+
+</body>
+
+</html>

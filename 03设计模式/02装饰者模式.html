@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01单例设计模式</title>
+</head>
+<body>
+    <!-- 
+        保证一个类只有一个实例并提供一个访问全局的访问点是单例设计模式
+     -->
+    
+    <script type="module">
+        import Person from './01.js'
+//多次实例化了就不是单例设计模式
+        let persion1=new Person('邢浩东');
+        // let persion2=new person('邢浩东2');
+        console.log(persion1)
+    </script>
+</body>
+</html>

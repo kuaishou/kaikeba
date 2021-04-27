@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02面向对象</title>
+</head>
+<body>
+    
+
+<script>
+
+
+
+//ES2020----默认参数
+function test(name='张三',age=18){
+    console.log(name,age)
+}
+test()
+//可选链式操作
+let obj={};
+//console.log(obj.name.age)//报错
+//console.log(obj.name?.age)//使用chrome浏览器,其他浏览器报错
+
+//ES6继承父类----可以继承属性和方法
+class xingD{
+    constructor(name){
+        this.name=name;
+        this.age=18;
+    }
+    getName(){
+        console.log(this.name)
+    }
+}
+class xingSon extends xingD{
+    constructor(name){
+        super(name)//super调用父类原型关键字传值
+    }
+}
+let newSon=new xingSon('ES6-邢浩东')
+
+newSon.getName()//继承父类方法
+
+
+</script>
+</body>
+</html>

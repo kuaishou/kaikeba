@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+    <script>
+
+
+        //promise三种状态
+        //1、pending   无返回
+        //2、resolved  成功返回
+        //3、rejected   返回失败
+
+        //promise三种返回值
+        //1、 无返回值
+        //2、又返回值
+        //3、返回prommise  
+        let p1 = new Promise((resolve, reject) => {
+            resolve('成功')
+            // reject('失败')
+        })
+        p1.then((res) => {
+            console.log(res)
+            console.log('第一次then')
+            return new Promise((resolve, reject) => {
+                resolve('二次promise')
+            })
+        }, err => {
+            console.log(err)
+        }).then((res) => {
+
+            console.log(res)
+            console.log('第二次then和二次返回的promise')
+        }).then((res) => {
+            // console.log(res)
+            console.log('第三次then')
+        }).catch((err) => {
+            console.log('捕获报错', err)
+        })
+        console.log(p1)
+
+
+
+
+        // function move(ele, target, direction, cb) {
+        //     let start = parseInt(window.getComputedStyle(ele, null)[direction])//去掉px转化为数字
+        //     let step = start-target>0?-5:5
+        //     start+=step
+        //     if (Math.abs(start - target)<5) {
+        //         cb && cb()
+        //     } else {
+        //         setTimeout(() => {
+        //             ele.style[direction] = start + 'px'
+        //             move(ele, target, direction, cb)
+        //         }, 30)
+        //     }
+        // }
+        // let box = document.querySelector('.box')
+        // move(box, 300, 'left', function () {//这种深度回调对代码结构有很大影响----可以用promise解决
+        //     move(box, 300, 'top', function () {
+        //         move(box, 0, 'left', function () {
+        //             move(box, 0, 'top', function () {
+        //                 console.log('成功啦')
+        //             })
+        //         })
+        //     })
+        // })
+
+        //上面这种深度回调对代码结构有很大影响----可以用promise解决
+
+
+        // function move(ele, target, direction) {
+        //     return new Promise((resolve,reject)=>{
+        //         function fn(){
+        //             let start = parseInt(window.getComputedStyle(ele, null)[direction])//去掉px转化为数字
+        //             let step = start - target > 0 ? -5 : 5
+        //             start += step
+        //             if (Math.abs(start - target) < 5) {
+        //                 resolve()
+        //             } else {
+        //                 setTimeout(() => {
+        //                     ele.style[direction] = start + 'px'
+        //                     fn()
+        //                 }, 30)
+        //             }
+        //         }
+        //         fn()
+        //     })
+
+        // }
+        // //promise解决的上面层层嵌套的问题
+        // let box = document.querySelector('.box')
+        // move(box, 300, 'left').then((res)=>{
+        //     return move(box, 300, 'top')
+        // }).then((res)=>{
+        //     return move(box, 0, 'left')
+        // }).then((res)=>{
+        //     return move(box, 0, 'top')
+        // }).then((res)=>{
+        //     console.log('移动成功')
+        // }).catch(err=>{
+        //     console.log(err)
+        // })
+
+
+        let pro1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('111--2 秒')
+                // reject('失败222--1 秒')
+            }, 2000);
+        })
+        let pro2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('222--1 秒')
+            }, 1000);
+        })
+        //promise  的all方法执行多个promise---所有的都执行完成并且resolve成功才可以获取res结果--res是数组
+        Promise.all([pro1, pro2]).then(res => {
+            console.log(res, 'all多个promise都执行完成后获取的值')
+        })
+        //promise  的race方法执行多个promise---只要有一个返回了就获取res
+        Promise.race([pro1, pro2]).then(res => {
+            console.log(res, 'race只要有一个返回了就获取res')
+        })
+        //promise  的finally方法不管成功失败都会执行
+        pro2.then(res => {
+            console.log(res)
+        }).finally(() => {
+            console.log('finally执行')
+        })
+
+        //直接用promise创建成功和失败状态
+        // let success=Promise.resolve('success直接成功')
+        // let err=Promise.reject('err直接失败')
+        // console.log(success)
+        // console.log(err)
+
+
+
+        //es7方法
+        let fnpro1 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('111--fnpro1')
+                }, 1000);
+            })
+        }
+        let fnpro2 = function () {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('222--fnpro2')
+                }, 1000);
+            })
+        }
+        //async ; await   把异步.then变成同步写法----还是异步执行；写法更简单，代码结构更漂亮
+//解决了下面多个链式操作问题
+// move(box, 300, 'left').then((res)=>{ return move(box, 300, 'top')}).then((res)=>{return move(box, 0, 'left')}).then((res)=>{return move(box, 0, 'top')}).then((res)=>{console.log('移动成功')})
+        async function asynsFn() {
+            try {
+                let res1 = await fnpro1()//await添加后就不需要.then
+                console.log(res1)
+                let res2 = await fnpro2()//await添加后就不需要.then
+                console.log(res2)
+            } catch (err) {
+                console.log(err)
+            }
+
+
+        }
+        asynsFn()
+
+
+        function awamove(ele, target, direction) {
+            return new Promise((resolve,reject)=>{
+                function fn(){
+                    let start = parseInt(window.getComputedStyle(ele, null)[direction])//去掉px转化为数字
+                    let step = start - target > 0 ? -5 : 5
+                    start += step
+                    if (Math.abs(start - target) < 5) {
+                        resolve()
+                    } else {
+                        setTimeout(() => {
+                            ele.style[direction] = start + 'px'
+                            fn()
+                        }, 30)
+                    }
+                }
+                fn()
+            })
+
+        }
+        //promise解决的上面层层嵌套的问题
+        let box = document.querySelector('.box')
+      async  function boxMove(){
+          await awamove(box, 300, 'left')
+          await awamove(box, 300, 'top')
+          await awamove(box, 0, 'left')
+          await awamove(box, 0, 'top')
+
+        }
+        boxMove()
+    
+
+    </script>
+</body>
+
+</html>

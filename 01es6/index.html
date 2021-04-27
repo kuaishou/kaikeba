@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开课宝1---表格排序</title>
+    <style>
+        table{
+            width: 100%;
+            border: 1px solid #000;
+        }
+        thead{
+            width: 100%;
+        }
+        td{
+            width: 25%;
+            font-size: 25px;
+            text-align: center;
+        }
+        th{
+            width: 25%;
+            font-size: 25px;
+            text-align: center;
+        }
+        button{
+            width: 22%;
+            height: 40px;
+            margin-bottom: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<h3 style="text-align: center;">表格模板</h3>
+<button id="agepai">年龄排序</button>
+<button id="manpai">显示男性</button>
+<button id="womanpai">显示女性</button>
+<button id="moren">默认排序</button>
+<!-- <button>年龄排序</button> -->
+<table>
+    <thead>
+        <td>ID</td>
+        <td>姓名</td>
+        <td>年龄</td>
+        <td>性别</td>
+    </thead>
+    <tbody id="Tbody">
+        <tr>
+            <th>1</th>
+            <th>邢浩东</th>
+            <th>18</th>
+            <th>男</th>
+        </tr>
+    </tbody>
+
+</table>
+
+ <script>   
+const obj=[
+    {
+        id:1,
+        name:'邢浩东',
+        age:18,
+        sex:'男'
+    },{
+        id:2,
+        name:'李白',
+        age:18,
+        sex:'男'
+    },{
+        id:3,
+        name:'花木兰',
+        age:16,
+        sex:'女'
+    },{
+        id:4,
+        name:'杜甫',
+        age:68,
+        sex:'男'
+    }
+]
+
+const render =(data)=>{
+    let Tbody=document.getElementById("Tbody");
+    Tbody.innerHTML='';
+    data.forEach(item => {
+        let tr=document.createElement("tr");
+        tr.innerHTML=`
+            <th>${item.id}</th>
+            <th>${item.name}</th>
+            <th>${item.age}</th>
+            <th>${item.sex}</th>`
+        Tbody.appendChild(tr)
+    });
+
+}
+render(obj)
+let daddd=JSON.stringify(obj)
+//年龄排序
+const AgePaixu=()=>{
+   let ageObj= obj.sort((a,b)=>a.age-b.age)//排序
+    render(ageObj)
+}
+let ageBtn=document.getElementById("agepai");
+ageBtn.onclick=()=>{    AgePaixu()}
+
+
+//显示男
+const manPaixu=(sexData)=>{
+   let manObj= obj.filter((item)=>item.sex===sexData)//排序
+   console.log(manObj)
+    render(manObj)
+}
+let manBtn=document.getElementById("manpai");
+manBtn.onclick=()=>{    manPaixu('男')}
+let womanBtn=document.getElementById("womanpai");
+womanBtn.onclick=()=>{    manPaixu('女')}
+let moren=document.getElementById("moren");
+moren.onclick=()=>{     render(JSON.parse(daddd))}
+
+</script>   
+</body>
+</html>

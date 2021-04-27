@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹框组件</title>
+    <style>
+        /* .dialog{
+            text-align: center;
+        } */
+    </style>
+</head>
+<body>
+
+    <button class="openLog">打开弹框</button>
+
+   
+    
+<script type="module">
+    import dialog from "./01dialog.js";
+
+    // let newLog=new dialog;
+    let data={
+        title:'天下第一前端000',
+        content:'东东爱前端0000',
+        success(e){
+            console.log(e)
+            console.log('页面传值')
+        }
+    }
+    let ddododo=new dialog(data);
+    let open =document.querySelector('.openLog')
+    open.onclick=function(){
+        ddododo.open()
+        // newLog.open(data)
+        
+    }
+
+
+</script>
+</body>
+</html>

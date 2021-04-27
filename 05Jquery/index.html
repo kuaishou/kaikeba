@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery库封装</title>
+    <style>
+        .box{
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">大盒子1111111</div>
+    <div class="box">大盒子22222</div>
+    
+</body>
+
+<script src="./myJquery.js"></script>
+<script>
+
+$('.box').eq(1).click(function(){
+    console.log(this.innerHTML,'页面点击')
+})
+$('.box').eq(0).on('mouseover mousedown',function(){
+    console.log(this.innerHTML,'页面点击')
+})
+</script>
+</html>

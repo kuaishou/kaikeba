@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+//        let obg={
+//            a:1,
+//            b:2,
+//            c:3,
+//        }
+//     let arr=['e','f','g']
+//     console.log(arr)
+//     console.log(obg)
+//     for(let ad in arr){
+//         console.log(ad)
+//     }
+
+//     for(let ofs of arr){
+//         console.log(ofs)
+//     }
+// //对象迭代----对象没有迭代iterator方法会报错  现在实现以下对象的迭代
+// obg[Symbol.iterator]=function(){
+//     let values=Object.values(obg);
+//     let index=0;
+//     return {
+//         next(){
+//             if(index>=values.length){
+//                 return {
+//                     done:true
+//                 }
+//             }else{
+//                 return {
+//                     done:false,
+//                     value:values[index++]
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+// for(let obgad in obg){
+//         console.log(obgad)
+//     }
+
+// for(let obgofs of obg){
+//     console.log(obgofs)
+// }
+
+
+
+
+// Generator函数
+
+function *fn(){
+    yield new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(1)
+            resolve()
+        },500)
+    });
+    yield  new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(2)
+            resolve()
+        },500)
+    });
+    yield  new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log(3)
+            resolve()
+        },500)
+    });
+}
+
+function co(fn){
+    let f=fn
+    next()
+    function next(){
+        let result=f.next()
+        if(!result.done){//一个执行完再执行下一个
+            result.value.then(()=>{
+                next()
+            })
+        }
+    }
+}
+let f=fn()
+
+co(f)//异步调用
+console.log(f)
+// console.log(f.next)
+// for(let val of f){
+//     console.log(val)
+// }
+
+   </script> 
+</body>
+</html>
