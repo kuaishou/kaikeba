@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的mvvm框架源码逻辑</title>
+</head>
+<body>
+
+<div id="top">
+    {{message}}
+    <input v-model='mydata' type="text">{{mydata}}
+</div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //数据优先。数据驱动
+        let vm=new Vue({
+            el:"#top",
+            data() {
+                return {
+                message:'邢浩东的vue',
+                mydata:"双向数据绑定"
+                }
+            },
+        })
+    </script>
+</body>
+</html>

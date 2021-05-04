@@ -35,7 +35,7 @@
         //3、返回prommise  
         let p1 = new Promise((resolve, reject) => {
             resolve('成功')
-            // reject('失败')
+            reject('失败')
         })
         p1.then((res) => {
             console.log(res)

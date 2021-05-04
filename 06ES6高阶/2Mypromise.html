@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise</title>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+    </div>
+    <script src="./2Mypromise.js"></script>
+    <script>
+        // setTimeout(()=>{
+        //    console.log('1111')
+        //   })
+        //     Promise.resolve().then(function () {
+        //         console.log('two');
+        //     });
+    //    let p1s =new Promise((resolve,reject)=>{
+    //         resolve('原生---我的promise')
+    //     })
+    //     p1s.then((eee)=>{
+    //         console.log(eee)
+    //     })
+
+        // let p1 =new Promise((resolve,reject)=>{
+        //     reject('成功')
+        // }).then((res)=>{
+        //     console.log(res,'成功1')
+        // })
+        // p1.then((res)=>{
+        //     console.log(res,'成功')
+        // },err=>{
+        //     console.log(err,'错误')
+        // })
+        //promise三种状态
+        //1、pending   无返回
+        //2、resolved  成功返回
+        //3、rejected   返回失败
+
+      let p1=new  Mypromise((resolve,reject)=>{
+         //resolve('成功---我的promise')
+        
+          setTimeout(()=>{
+            resolve('成功---我的promise')
+          },1000)
+          console.log('我的\dddd')
+            // reject('失败')
+        //   console.log('我的')
+      })
+      p1.then(res=>{
+        console.log('我的',res)
+      },err=>{
+        console.log('报错',err)
+      })
+    //   p1.then(res=>{
+    //     // console.log('第二次then',res)
+    //      return new Mypromise((resolve,reject)=>{
+    //         resolve('第二次链式调用')
+    //     })
+    //   }).then(res=>{
+    //     console.log('第二次链式调用结果',res)
+    //   })
+
+     // Mypromise.resolve('保费').then(res=>{console.log(res)})
+    //   Promise.reject('原生保费对对对').then(res=>{console.log('成功',res)},err=>{console.log('报错',err)})
+     // Mypromise.reject('保费对对对').then(res=>{console.log('成功',res)},err=>{console.log('报错',err)}).finally(()=>{console.log('默认执行')})
+        //promise三种返回值
+        //1、 无返回值
+        //2、又返回值
+        //3、返回prommise  
+
+//执行顺序宏任务--位任务
+
+//四.链式调用问题
+
+
+    </script>
+</body>
+
+</html>

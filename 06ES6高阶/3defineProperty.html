@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3defineProperty观察数据改变方法</title>
+</head>
+<body>
+    <script>
+        //正常对象没有get(),set()方法
+        //defineProperty之后有get(),set()方法
+        let obj={
+            myname:'邢浩东'
+        }
+        console.log(obj)
+        let value=obj['myname']
+        Object.defineProperty(obj,'myname',{
+            configurable:true,//configurable 给的说明是 如果为 false , 那么不可以修改, 不可以删除.
+            enumerable:true,//enumerable 控制是否可以枚举.
+            get(){
+                return value//观察到数据变化
+            },
+            set(val){
+                value=val
+                //console.log(obj.myname)
+            }
+        })
+        console.log(obj)
+        console.log(obj.myname)
+        obj.myname='江萌'
+        console.log(obj.myname)
+        // console.log(obj.myname)
+    </script>
+</body>
+</html>
