@@ -24,9 +24,10 @@ class MyVue{
                 return target[key]
             },
             set(target,key,newValue){
-                objDep[key].notify(newVal)
+                objDep[key].notify(newValue)
 
                 target[key]=newValue
+                return true
             }
         })
         // Object.keys(data).forEach(key=>{
@@ -68,7 +69,7 @@ class MyVue{
                     new Watcher(this.$data,$1,(newval)=>{
                         let oldVal=this.$data[$1]
                         let reg=new RegExp(oldVal)
-                        node.textContent=node.textContent.replace(reg,newval)
+                        node.textContent=node.textContent.replace(reg,newval)//这里将来要做优化；现在bug多次输入input会重复增加
                     })
                     node.textContent=node.textContent.replace(reg,this.$data[$1])
                 }

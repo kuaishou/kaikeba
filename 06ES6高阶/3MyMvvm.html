@@ -10,24 +10,28 @@
 
 <div id="top">
     111111{{message}}999999
-    <div>{{message}}
+    <div>
         <div>{{message}}</div>
     </div>
+    
     <input v-model='mydata' type="text">{{mydata}}
+
+    <div v-html='htmls'></div>
 </div>
 
 
-
-    <script src="./3MyMvvm2.js"></script>
+    <script src="./3MyMvvm3.js"></script>
     <script>
         //数据优先。数据驱动
         let vm=new MyVue({
             el:"#top",
             data:{
                 message:'邢浩东的vue',
-                mydata:"双向数据绑定"
+                mydata:"双向数据绑定",
+                htmls:'<h1>我是邢浩东的html</h1>'
             },
         })
+        console.log(vm)
 
         setTimeout(()=>{
             vm.$data.message='邢浩东更新数据啦'
