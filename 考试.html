@@ -11,6 +11,30 @@
 <body>
 
     <script>
+
+
+        function add(m) { return m + 12 }
+        let dd = add(1)
+        function add(m) { return m + 1 }
+        let ddd = add(1)
+        console.log(dd)
+        console.log(ddd)
+
+        mobj = {
+            foo: 'bar',
+            func: function () {
+                var self = this;
+                console.log(self.foo)
+                console.log(this.foo)
+                    (function () {
+                        console.log(self.foo)
+                        console.log(this.foo)
+                    }())
+
+            }
+        }
+        mobj.func()
+
         console.log(null == undefined)   //true
         console.log(null == false)   //false
         console.log(null == 0)   //false
@@ -26,34 +50,34 @@
         let ddd3 = fun({})//{ a = 123, b = 456 }
         console.log(ddd3)
 
-        let p1=new Promise((resolve,reject)=>{
+        let p1 = new Promise((resolve, reject) => {
             reject('报错')
-        }).catch((err)=>{
-            console.log(1,err)
-        }).then((res)=>{
-            console.log(2,res)
+        }).catch((err) => {
+            console.log(1, err)
+        }).then((res) => {
+            console.log(2, res)
         })
-        p1.catch((err)=>{
-            console.log(3,err)
-        }).then((res)=>{
-            console.log(4,res)
+        p1.catch((err) => {
+            console.log(3, err)
+        }).then((res) => {
+            console.log(4, res)
         })
         // 1 "报错"
         // 2 undefined
         // 4 undefined
- function sleep(time){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            resolve('成功')  
-        },time)
-     
-    })
- }
- async function funccc(){
-     await sleep(1000)
-     console.log('await成功啦')
- }
- funccc()
+        function sleep(time) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('成功')
+                }, time)
+
+            })
+        }
+        async function funccc() {
+            await sleep(1000)
+            console.log('await成功啦')
+        }
+        funccc()
 
     </script>
 </body>
