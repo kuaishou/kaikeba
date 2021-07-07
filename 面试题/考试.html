@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>考试汇总</title>
+</head>
+
+<body>
+
+
+
+    <script>
+    //原型链
+    //浏览器缓存和协商缓存
+    //function和箭头函数区别
+    //原型链和继承
+    //propotype和——poto区别
+    //vue3.0的setup可以渲染几次
+    //vue的mixin
+    //vue的router原理hase
+    //vue的rouder的虚拟dom原理
+    //组件之间的引用
+ 
+
+        function add(m) { return m + 12 }
+        let dd = add(1)
+        function add(m) { return m + 1 }
+        let ddd = add(1)
+        console.log(dd)
+        console.log(ddd)
+
+        mobj = {
+            foo: 'bar',
+            func: function () {
+                var self = this;
+                console.log(self.foo)
+                console.log(this.foo)
+                    (function () {
+                        console.log(self.foo)
+                        console.log(this.foo)
+                    }())
+
+            }
+        }
+        mobj.func()
+
+        console.log(null == undefined)   //true
+        console.log(null == false)   //false
+        console.log(null == 0)   //false
+        console.log(false == 0)   //true
+        let num;
+        console.log(num + 1)   //NaN
+
+        function fun({ a = 123, b = 456 } = { a: 1, b: 2 }) {
+            return { a, b }
+        }
+        let ddd1 = fun()//{a:1,b:2}
+        let ddd2 = fun({ a: 10 })//{a:10,b:456}
+        let ddd3 = fun({})//{ a = 123, b = 456 }
+        console.log(ddd3)
+
+        let p1 = new Promise((resolve, reject) => {
+            reject('报错')
+        }).catch((err) => {
+            console.log(1, err)
+        }).then((res) => {
+            console.log(2, res)
+        })
+        p1.catch((err) => {
+            console.log(3, err)
+        }).then((res) => {
+            console.log(4, res)
+        })
+        // 1 "报错"
+        // 2 undefined
+        // 4 undefined
+        function sleep(time) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('成功')
+                }, time)
+
+            })
+        }
+        async function funccc() {
+            await sleep(1000)
+            console.log('await成功啦')
+        }
+        funccc()
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件绑定方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+
+
+    <script>
+
+        //vue不允许子组件改变父数据
+        //两种方法改变父组件值
+        //比较好的方法sync方法  例如title值；子组件this.$emit('update:title', this.age)   父组件 <childA :title="age" :title.sync='age'></childA>  
+        Vue.component('childA', {
+            props: ["title"],
+            data() {
+                return {
+                    age: 0
+                }
+            },
+            methods: {
+                handerclick() {
+                    this.age++;
+                    this.$emit('update:title', this.age)
+                }
+            },
+            template: `<div>
+            <p>子组件：{{age}}</p>
+            <p>子组件：{{title}}</p>
+            <button @click="handerclick">点击添加年龄</button>
+        </div>`
+        })
+
+
+
+        app = new Vue({
+            el: "#app",
+            data: {
+                name: '邢浩东',
+                age: 18
+            },
+            template: `<div>
+        <p>姓名：{{name}}</p>
+        <h2>年龄：{{age}}</h2>
+        <childA :title="age" :title.sync='age'></childA>  
+    </div>`
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

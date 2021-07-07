@@ -1,0 +1,96 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\xinghaodong\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js star
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\NetSarang;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;%MAVEN_HOME%\bin;C:\Program Files\Java\jdk1.8.0_192\bin;C:\Program Files\Java\jdk1.8.0_192\jre\bin;%GRADLE_HOME%\bin;D:\APP\SVN\bin;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_192\bin;D:\APP\Flutter\flutter\bin;C:\Users\xinghaodong\AppData\Local\Android\Sdk;C:\Program Files\Git\cmd;C:\Program Files\TortoiseGit\bin;C:\Users\xinghaodong\.windows-build-tools\python27\;;D:\APP\VScode\Microsoft VS Code\bin;D:\APP\webstorm\WebStorm 2019.1\bin;;C:\Users\xinghaodong\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.10
+
+Node version: 
+  10.16.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  SyntaxError: E:\学习资料\kaikeba\09webpack\package.json: Unexpected token / in JSON at position 181
+      at JSON.parse (<anonymous>)
+      at C:\Users\xinghaodong\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Users\xinghaodong\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
+      at C:\Users\xinghaodong\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+
+npm manifest: 
+  {
+    "devDependencies": {
+      "webpack": "^5.37.1",
+      "webpack-cli": "^4.7.0"
+    },
+    "name": "09webpack",
+    "description": "webpack模块化",
+    "version": "1.0.0",
+    "private": true,
+    // "main": "index.js",
+    "dependencies": {
+      "_clone-deep@4.0.1@clone-deep": "^4.0.1",
+      "_colorette@1.2.2@colorette": "^1.2.2",
+      "_envinfo@7.8.1@envinfo": "^7.8.1",
+      "_cross-spawn@7.0.3@cross-spawn": "^7.0.3",
+      "_commander@7.2.0@commander": "^7.2.0",
+      "_execa@5.0.0@execa": "^5.0.0",
+      "_fastest-levenshtein@1.0.12@fastest-levenshtein": "^1.0.12",
+      "_find-up@4.1.0@find-up": "^4.1.0",
+      "_get-stream@6.0.1@get-stream": "^6.0.1",
+      "_has@1.0.3@has": "^1.0.3",
+      "_human-signals@2.1.0@human-signals": "^2.1.0",
+      "_import-local@3.0.2@import-local": "^3.0.2",
+      "_function-bind@1.1.1@function-bind": "^1.1.1",
+      "_interpret@2.2.0@interpret": "^2.2.0",
+      "_is-stream@2.0.0@is-stream": "^2.0.0",
+      "_is-plain-object@2.0.4@is-plain-object": "^2.0.4",
+      "_isexe@2.0.0@isexe": "^2.0.0",
+      "_isobject@3.0.1@isobject": "^3.0.1",
+      "_kind-of@6.0.3@kind-of": "^6.0.3",
+      "_is-core-module@2.4.0@is-core-module": "^2.4.0",
+      "_mimic-fn@2.1.0@mimic-fn": "^2.1.0",
+      "_merge-stream@2.0.0@merge-stream": "^2.0.0",
+      "_locate-path@5.0.0@locate-path": "^5.0.0",
+      "_onetime@5.1.2@onetime": "^5.1.2",
+      "_p-limit@2.3.0@p-limit": "^2.3.0",
+      "_p-try@2.2.0@p-try": "^2.2.0",
+      "_p-locate@4.1.0@p-locate": "^4.1.0",
+      "_path-exists@4.0.0@path-exists": "^4.0.0",
+      "_path-key@3.1.1@path-key": "^3.1.1",
+      "_path-parse@1.0.6@path-parse": "^1.0.6",
+      "_pkg-dir@4.2.0@pkg-dir": "^4.2.0",
+      "_rechoir@0.7.0@rechoir": "^0.7.0",
+      "_resolve-cwd@3.0.0@resolve-cwd": "^3.0.0",
+      "_resolve-from@5.0.0@resolve-from": "^5.0.0",
+      "_resolve@1.20.0@resolve": "^1.20.0",
+      "_shebang-command@2.0.0@shebang-command": "^2.0.0",
+      "_shallow-clone@3.0.1@shallow-clone": "^3.0.1",
+      "_npm-run-path@4.0.1@npm-run-path": "^4.0.1",
+      "_shebang-regex@3.0.0@shebang-regex": "^3.0.0",
+      "_signal-exit@3.0.3@signal-exit": "^3.0.3",
+      "_strip-final-newline@2.0.0@strip-final-newline": "^2.0.0",
+      "_v8-compile-cache@2.3.0@v8-compile-cache": "^2.3.0",
+      "_webpack-cli@4.7.0@webpack-cli": "^4.7.0",
+      "_webpack-merge@5.7.3@webpack-merge": "^5.7.3",
+      "_which@2.0.2@which": "^2.0.2",
+      "_wildcard@2.0.0@wildcard": "^2.0.0",
+      "webpack": "^5.37.1"
+    },
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
