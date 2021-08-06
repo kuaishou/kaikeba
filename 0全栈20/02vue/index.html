@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重写vue</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{count}}</h1>
+    </div>
+</body>
+
+<script src="./myVue1.js"></script>
+<script>
+    //全家桶的原理剖析
+
+let app=new myVue({
+    el:'#app',
+    data:{
+        count:28
+    }
+})
+
+setInterval(() => {
+    app.$data.count++
+}, 1000);
+
+
+
+
+
+</script>
+</html>
