@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重写vue1.0</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{count}}</h1>
+        <p k-text="count"></p>
+        <h2 k-html="tipWord"></h2>
+        <input k-model='mydata' type="text">{{mydata}}
+        <button @click="changeDate">{{datt}}</button>
+    </div>
+</body>
+
+<script src="./myVue1.js"></script>
+<script>
+    //全家桶的原理剖析
+
+let app=new myVue({
+    el:'#app',
+    data:{
+        count:28,
+        tipWord:'<span style="color:red">邢浩东写的vue真棒啊，真秒啊</span>',
+        mydata:'我是k-model数据',
+        datt:"我是点击事件1"
+    },
+    methods: {
+        changeDate(){
+            this.datt=this.datt+'1'
+        }
+    },
+})
+
+setInterval(() => {
+    app.count++
+}, 1000);
+
+
+
+
+
+</script>
+</html>

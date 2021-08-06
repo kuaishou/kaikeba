@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{mse}}</h1>
+        <h2>年龄{{age}}</h2>
+        <h2>内容{{contenst}}</h2>
+        <input type="number" v-model.number='age'>
+    </div>
+
+    <script>
+
+var isPalindrome = function (s) {
+    let right = s.replace(/[^A-Za-z0-9]/ig, "").toLocaleUpperCase();
+    let left = right.split('').reverse().join('');
+    return right == left;
+};
+
+isPalindrome("A man, a plan, a canal: Panama")
+        app = new Vue({
+            el: "#app",
+            data: {
+                mse: '邢浩东',
+                age: 18,
+                content: '爱你江萌'
+            },
+            //***** watch和computed的区别
+            watch: {//handler：watch中需要具体执行的方法。与immediate、deep选项配合使用  是监控一个变量可以改变多个变量
+                mse:{
+                    handler(newv, oldv){
+                        console.log(newv, oldv)
+                        this.mse = newv
+                    },
+                    immediate: true,// 表示在wacth里声明了mse函数后，立即触发这里的handler方法。
+                    deep: true    
+                },
+            },
+            computed: {//this.age变化contenst就变化    是监控多个变量合成一个变量；多个变量任意一个变量变化都会触发计算属性
+                contenst() {
+                    return "邢浩东的爱人的年龄" + this.age
+                }
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

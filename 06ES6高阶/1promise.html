@@ -24,6 +24,21 @@
     <script>
 
 
+let px= new Promise((resolve, reject) => {
+            resolve('成功')
+        })
+        px.then(res=>{
+            console.log('第一次ff'+res)
+            return Promise.resolve(res)
+            return res
+        }).then(res=>{
+            console.log('第二次ff'+res)
+        }).catch(err => {
+
+        })
+
+
+
         //promise三种状态
         //1、pending   无返回
         //2、resolved  成功返回
@@ -50,7 +65,7 @@
             console.log(res)
             console.log('第二次then和二次返回的promise')
         }).then((res) => {
-            // console.log(res)
+            console.log(res)
             console.log('第三次then')
         }).catch((err) => {
             console.log('捕获报错', err)

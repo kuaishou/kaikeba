@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mixin混入</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+
+
+    <script>
+
+        //vue组件复用逻辑mixin
+        //把组件之间公用的方法抽离出来共用
+        //vue3干掉了mixin功能
+        //干掉原因1、命名冲突  2、命名不清晰找不到来源
+
+        const mixinA={
+            mounted() {
+                console.log('我是mixinA')
+            },
+            methods: {
+                getname(name){
+                    console.log('我是mixinA 的getname方法'+ name)
+                }
+            },
+        }
+
+
+
+        Vue.component('childA', {
+            mixins:[mixinA],
+            props: ["title"],
+            data() {
+                return {
+                    age: 0
+                }
+            },
+            methods: {
+            },
+            template: `<div>
+            <button @click="getname('邢浩东')">点击添加年龄</button>
+        </div>`
+        })
+
+        Vue.component('childB', {
+            mixins:[mixinA],
+            props: ["title"],
+            data() {
+                return {
+                    age: 0
+                }
+            },
+            methods: {
+                handerclick() {
+                    this.age++;
+                    this.$emit('update:title', this.age)
+                }
+            },
+            template: `<div>
+            <p>B子组件：{{age}}</p>
+            <p>B子组件：{{title}}</p>
+            <button @click="handerclick">点击添加年龄</button>
+        </div>`
+        })
+
+
+
+        app = new Vue({
+            el: "#app",
+            data: {
+                name: '邢浩东',
+                age: 18
+            },
+            template: `<div>
+        <p>姓名：{{name}}</p>
+        <h2>年龄：{{age}}</h2>
+        <childA :title="age" :title.sync='age'></childA>  
+        <childB :title="age" :title.sync='age'></childB>  
+    </div>`
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

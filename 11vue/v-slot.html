@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slot插槽</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+    </div>
+
+
+    <script>
+//默认插槽<slot></slot>
+//<template :name='header'>我是父指定头部插槽</template>  指定子组件插槽位置为 <slot name="header"></slot>    
+
+        Vue.component('childA', {
+            props: ["title"],
+            data() {
+                return {
+                    age: 0
+                }
+            },
+            methods: {
+                handerclick() {
+                    this.age++;
+                    this.$emit('update:title', this.age)
+                }
+            },
+            template: `<div>
+            <p>子组件：{{age}}</p>
+            <p>子组件：{{title}}</p>
+            <slot></slot>    
+            <slot name="header"></slot>    
+            <button @click="handerclick">点击添加年龄</button>
+        </div>`
+        })
+
+
+
+        app = new Vue({
+            el: "#app",
+            data: {
+                name: '邢浩东',
+                age: 18
+            },
+            template: `<div>
+        <p>姓名：{{name}}</p>
+        <h2>年龄：{{age}}</h2>
+        <childA :title="age" :title.sync='age'>
+            我是父默认插槽
+            <template :name='header'>我是父指定头部插槽</template>
+
+        </childA>  
+    </div>`
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>东东聊天室</title>
+</head>
+
+<body>
+
+    <textarea name="" id="box" cols="460" rows="10"></textarea>
+    <input type="text" id="content">
+    <button id="send">发送</button>
+
+    <!-- 自动匹配服务器文件 -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+
+        let box = document.querySelector('#box')
+        let content = document.querySelector('#content')
+        let send = document.querySelector('#send')
+
+        const scoket = io('/')//往发送io请求
+        scoket.on('hello', data => {
+            console.log('后端返回信息', data)
+            writeData(data)
+        })
+        scoket.on('message', data => {
+            console.log('后端返回信息', data)
+            writeData(data)
+        })
+
+        function writeData(data) {
+            box.innerHTML += data + '\r\n';
+        }
+
+
+        send.onclick = function () {
+            if (!content.value) {
+                alert('请填写要发给小伙伴的信息')
+                return
+            }
+            writeData('我说：' + content.value)
+            scoket.emit('message', content.value)
+            content.value = ''
+            content.focus()
+        }
+        content.onkeydown = function (e) {
+            var evt = window.event || e;
+            if (evt.keyCode != 13) {
+                return
+            }
+            if (!content.value) {
+                alert('请填写要发给小伙伴的信息')
+                return
+            }
+            writeData('我说：' + content.value)
+            scoket.emit('message', content.value)
+            content.value = ''
+            content.focus()
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

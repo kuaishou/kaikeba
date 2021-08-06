@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件绑定方法</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{mse}}</h1>
+        <h2>年龄{{age}}</h2>
+        <h2>v-modleee向子组件的双向数据绑定{{count}}</h2>
+    </div>
+
+
+    <script>
+
+        //1、v-model====input事件双向绑定
+        //     Vue.component('childA', {
+        //         props: ["title"],
+        //         data() {
+        //             return {
+        //                 age: 0
+        //             }
+        //         },
+        //         methods: {
+        //             handerclick() {
+        //                 // this.age++;
+        //                 this.$emit('input', this.age)
+        //             }
+        //         },
+        //         template: `<div>
+        //     <p>{{age}}</p>
+        //     <p>{{title}}</p>
+        //     <button @click="handerclick">点击添加年龄</button>
+        // </div>`
+        //     })
+
+
+        //2、v-model====自定义事件双向绑定
+        Vue.component('childA', {
+            model: {
+                props: 'haha',
+                event: 'zhidingyishijian'//自定义事假
+            },
+            props: {
+                haha: '',
+                title: ''
+            },
+            data() {
+                return {
+                    age: 0
+                }
+            },
+            methods: {
+                handerclick() {
+                    this.age++;
+                    this.$emit('zhidingyishijian', this.age)
+                }
+            },
+            template: `<div>
+        <p>{{age}}</p>
+        <p>{{title}}</p>
+        <button @click="handerclick">点击添加年龄</button>
+    </div>`
+        })
+
+
+
+
+        app = new Vue({
+            el: "#app",
+            data: {
+                mse: '邢浩东',
+                age: 18,
+                count: 88
+            },
+            template: `<div>
+        <p>{{mse}}</p>
+        <h2>v-modleee向子组件的双向数据绑定{{count}}</h2>
+        <childA title="父传子的标提" v-model='count'></childA>  
+    </div>`
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>

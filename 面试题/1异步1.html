@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise加载图片</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        //一、用promise加载图片的方法
+        const loadimg = (url) => {
+            return new Promise((resolve, reject) => {
+                let img = document.createElement('img')
+                img.onload = function () {
+                    resolve(img)
+                }
+                img.onerror = function () {
+                    reject('加载失败')
+                }
+                img.src = url
+            })
+        }
+        let url11 = "https://stest.sinosafe.com.cn/micro-doc/japp-upload/cms/res/20210122/d4a2d0d9041345d49f05eb84a984b6b8.png"
+        loadimg(url11).then(img => {
+            console.log(img)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+
+        //二、什么是Event Loop  调用栈
+
+        //宏任务（settimeout/ajax/dom等）
+        //微任务 （promise、acny await）
+        //微任务先于宏任务执行   --- 执行顺序是  --- 微任务  》 DOM  》 settimeout
+        console.log(1)
+
+        setTimeout(() => {
+            console.log(2)
+        }, 0);
+        new Promise((resolve, reject) => {
+            resolve(console.log(4))
+            setTimeout(() => {
+                console.log("4-1")
+            }, 0);
+        }).then(() => {
+            console.log(5)
+            setTimeout(() => {
+                console.log("5-1")
+            }, 0);
+        })
+        console.log(3)
+
+        //promise三种状态  pending  fulfilled  rejected   
+
+        //promise解决回调地狱
+
+
+
+
+    </script>
+</body>
+
+</html>
